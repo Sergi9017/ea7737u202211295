@@ -1,0 +1,97 @@
+.toolbar {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  padding: 0 24px;
+  gap: 16px;
+  height: 64px;
+  box-shadow: 0 2px 12px rgba(2, 132, 199, 0.15);
+  position: relative;
+  z-index: 10;
+}
+
+.logo {
+  height: 38px;
+  width: 38px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.toolbar-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-button-toggle-group {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+mat-button-toggle {
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+mat-button-toggle.mat-button-toggle-checked {
+  background-color: #ffffff;
+  color: #0284c7;
+}
+
+.layout-container {
+  height: calc(100vh - 64px);
+  background: #f8fafc;
+}
+
+.sidenav {
+  width: 250px;
+  background-color: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  padding-top: 16px;
+}
+
+mat-nav-list {
+  padding: 0 12px;
+}
+
+mat-nav-list a.mat-mdc-list-item {
+  border-radius: 12px;
+  margin-bottom: 6px;
+  transition: all 0.2s ease;
+  color: #475569;
+}
+
+mat-nav-list a.mat-mdc-list-item:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+mat-nav-list a.mat-mdc-list-item.active {
+  background-color: #e0f2fe;
+  color: #0284c7;
+  font-weight: 600;
+}
+
+mat-nav-list a.mat-mdc-list-item.active mat-icon {
+  color: #0284c7;
+}
+
+.page-content {
+  padding: 32px 40px;
+  max-width: 1280px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: 20px 16px;
+  }
+}
