@@ -1,0 +1,76 @@
+<section class="reservation-page" aria-labelledby="reservation-heading">
+  <div class="form-header">
+    <h1 id="reservation-heading">{{ 'new-reservation-title' | translate }}</h1>
+    <h2>{{ 'new-reservation-subtitle' | translate }}</h2>
+  </div>
+
+  <div class="form-container">
+    <form class="reservation-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'activity-type' | translate }}</mat-label>
+        <mat-select formControlName="activityType" required>
+          @for (activity of activityTypes; track activity) {
+            <mat-option [value]="activity">{{ 'activity-' + activity | translate }}</mat-option>
+          }
+        </mat-select>
+        @if (form.controls.activityType.hasError('required')) {
+          <mat-error>{{ 'error-activity-required' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <div class="weather" aria-live="polite">
+        @if (weatherStore.loading()) {
+          <div class="weather-box weather-loading">
+            <p>{{ 'weather-loading' | translate }}</p>
+          </div>
+        }
+        @if (weatherStore.weather(); as weather) {
+          <div class="weather-box weather-success">
+            <p>{{ 'weather-temperature' | translate: {value: weather.temperature, unit: weather.unit} }}</p>
+          </div>
+        }
+        @if (weatherStore.failed()) {
+          <div class="weather-box weather-error">
+            <p role="alert" class="error">{{ 'weather-error' | translate }}</p>
+          </div>
+        }
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'participant-name' | translate }}</mat-label>
+        <input matInput formControlName="participantName" required>
+        @if (form.controls.participantName.hasError('required')) {
+          <mat-error>{{ 'error-name-required' | translate }}</mat-error>
+        } @else if (form.controls.participantName.hasError('blank')) {
+          <mat-error>{{ 'error-name-blank' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'participants' | translate }}</mat-label>
+        <input matInput type="number" min="1" formControlName="participants" required>
+        @if (availableCapacity() !== null) {
+          <mat-hint>{{ 'hint-available-capacity' | translate: {value: availableCapacity()} }}</mat-hint>
+        }
+        @if (form.controls.participants.hasError('required')) {
+          <mat-error>{{ 'error-participants-required' | translate }}</mat-error>
+        } @else if (form.controls.participants.hasError('min')) {
+          <mat-error>{{ 'error-participants-min' | translate }}</mat-error>
+        } @else if (form.controls.participants.hasError('capacity')) {
+          <mat-error>{{ 'error-participants-capacity' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      @if (errorKey()) {
+        <p role="alert" class="form-error">{{ errorKey()! | translate }}</p>
+      }
+
+      <div class="actions">
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || !weatherStore.weather() || submitting()">
+          {{ 'create' | translate }}
+        </button>
+        <button mat-stroked-button type="button" (click)="cancel()">{{ 'cancel' | translate }}</button>
+      </div>
+    </form>
+  </div>
+</section>
