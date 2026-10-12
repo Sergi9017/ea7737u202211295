@@ -1,0 +1,33 @@
+<mat-card class="summary-card" appearance="outlined">
+  <mat-card-header class="summary-header">
+    <mat-card-title class="card-title">{{ summary().center.name }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content class="summary-content">
+    @if (summary().reservations.length === 0) {
+      <div class="empty-state">
+        <p>{{ 'empty' | translate }}</p>
+      </div>
+    } @else {
+      <ul class="reservation-list">
+        @for (reservation of summary().reservations; track reservation.id) {
+          <li class="reservation-item">
+            <span class="participant-name">{{ reservation.participantName }}</span>
+            <span class="participant-badge">{{ reservation.participants }}</span>
+          </li>
+        }
+      </ul>
+    }
+  </mat-card-content>
+
+  <mat-card-footer class="summary-footer">
+    <div class="stat-item">
+      <span class="stat-label">{{ 'total-participants' | translate }}:</span>
+      <strong class="stat-value">{{ summary().totalParticipants }}</strong>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">{{ 'available-capacity' | translate }}:</span>
+      <strong class="stat-value capacity-value">{{ summary().availableCapacity }}</strong>
+    </div>
+  </mat-card-footer>
+</mat-card>
