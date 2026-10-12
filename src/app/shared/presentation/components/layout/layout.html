@@ -1,0 +1,33 @@
+<mat-toolbar class="toolbar" role="banner">
+  <img class="logo" src="assets/logo.svg" [alt]="'logo-alt' | translate">
+  <span class="toolbar-title">{{ 'toolbar-title' | translate }}</span>
+  <span class="spacer"></span>
+  <mat-button-toggle-group
+    [value]="currentLanguage()"
+    (change)="changeLanguage($event.value)"
+    [attr.aria-label]="'language-selector-label' | translate">
+    <mat-button-toggle value="en" aria-label="English">EN</mat-button-toggle>
+    <mat-button-toggle value="es" aria-label="Español">ES</mat-button-toggle>
+  </mat-button-toggle-group>
+</mat-toolbar>
+
+<mat-sidenav-container class="layout-container">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <nav [attr.aria-label]="'main-navigation-label' | translate">
+      <mat-nav-list>
+        @for (option of navigationOptions; track option.link) {
+          <a mat-list-item [routerLink]="option.link" routerLinkActive="active">
+            <mat-icon matListItemIcon aria-hidden="true">{{ option.icon }}</mat-icon>
+            <span matListItemTitle>{{ option.labelKey | translate }}</span>
+          </a>
+        }
+      </mat-nav-list>
+    </nav>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <main class="page-content">
+      <router-outlet/>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
