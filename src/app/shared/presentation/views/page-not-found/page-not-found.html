@@ -1,0 +1,13 @@
+<section class="not-found-container" role="alert">
+  <div class="not-found-card">
+    <div class="icon-container">
+      <mat-icon class="error-icon">sentiment_dissatisfied</mat-icon>
+    </div>
+    <h1>{{ 'page-not-found-title' | translate }}</h1>
+    <p>{{ 'page-not-found-message' | translate: {path: invalidPath} }}</p>
+    <button mat-flat-button color="primary" type="button" (click)="navigateToHome()">
+      <mat-icon>home</mat-icon>
+      {{ 'go-home' | translate }}
+    </button>
+  </div>
+</section>
